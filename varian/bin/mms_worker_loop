@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd ${M3D_APP_DIR}
+while true
+do
+    mms_worker_parent --testing
+    echo "#############################################"
+    echo "Ran mms_worker_parent --testing, sleeping now"
+    echo "#############################################"
+    sleep 5
+done

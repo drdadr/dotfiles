@@ -1,0 +1,62 @@
+Host *
+  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/.ssh/mobius
+  IdentityFile ~/.ssh/varian
+  IdentityFile ~/.ssh/jenkins
+  AddKeysToAgent yes
+
+Host pam3d-dev1
+  HostName 10.2.241.11
+  ForwardAgent yes
+  User ddreher
+
+Host pam3d-dev2
+  HostName 10.2.241.12
+  ForwardAgent yes
+  User ddreher
+
+Host pam3d-dev3
+  HostName 10.2.241.40
+  ForwardAgent yes
+  User ddreher
+
+Host pam3d-dev4
+  HostName 10.2.241.57
+  ForwardAgent yes
+  User ddreher
+
+Host pam3d-tst-3v-07
+  HostName 10.2.240.202
+  ForwardAgent yes
+  User varian
+
+Host pam3d-tst-3v-08
+  HostName 10.2.240.203
+  ForwardAgent yes
+  User varian
+
+Host pam3d-tst-3v-09
+  HostName 10.2.240.204
+  ForwardAgent yes
+  User varian
+
+Host pam3d-tst-3v-10
+  HostName 10.2.240.215
+  ForwardAgent yes
+  User varian
+
+Host pam3d-tst-3v-11
+  HostName 10.2.240.219
+  ForwardAgent yes
+  User varian
+
+Host pam3d-tst-3v-12
+  HostName 10.2.240.220
+  ForwardAgent yes
+  User varian
+
+Host github_mms*
+  HostName github.com
+
+Host bitbucket.com github.com gitlab.com
+  User git

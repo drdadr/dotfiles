@@ -1,0 +1,25 @@
+# Collection and management of bash aliases
+# ============================================================================ #
+# shellcheck shell=bash
+
+# General purpose aliases
+# ---------------------------------------------------------------------------- #
+# Remap cp, mv and rm to avoid accidents
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+# List subdirectories in current working directory
+alias lsd='ls -d */'
+# Copy current directory to clipboard
+alias cpd='echo -en `pwd`/ | xclip -selection clipboard'
+# Use nano with undo
+alias nano='nano -u'
+
+
+# Source different alias files stored in ~/.alias/ as *.alias files
+for alias_file in ~/.alias/*.alias; do
+  if [ -f "$alias_file" ]; then
+    echo "Sourcing alias file: $alias_file"
+    . "$alias_file"
+  fi
+done

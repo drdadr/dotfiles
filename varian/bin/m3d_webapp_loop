@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd ${M3D_APP_DIR}
+while true
+do python ./src/mms/webapp/app.wsgi --threaded
+    sleep 1
+done

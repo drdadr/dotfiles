@@ -1,0 +1,57 @@
+# Mobius aliases for personal computer
+# shellcheck shell=bash
+
+# OS specific setup steps
+case "$(uname -s)" in
+
+   Darwin)
+     # Mac OS X setup
+     ;;
+
+   Linux)
+     # Linux setup
+     ;;
+
+   CYGWIN*|MINGW32*|MSYS*)
+     # Windows setup
+     #Python alias for bug in MSys2
+     alias python='winpty python.exe'
+     # X11 forwarding on Windows
+     export DISPLAY=localhost:0.0
+     ;;
+
+   # Add here more strings to compare
+
+   *)
+     # Other OS setup
+     ;;
+esac
+
+
+# Start tmux server if a) tmux exists and b) we are in an interactive non-screen non-tmux shell
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    tmux start-server
+fi
+
+function ssht () {
+# Login via ssh and directly attach a tmux session 'base' if possible.
+# If not possible default to bash.
+  /usr/bin/ssh -t "$@" "tmux new-session -A -s base 2>/dev/null || bash";
+}
+
+debug_port_dev1=$(( 20000 + M3D_USER_NUMBER*1000 + 85 ))
+debug_port_dev2=$(( 20000 + M3D_USER_NUMBER*1000 + 86 ))
+debug_port_dev3=$(( 20000 + M3D_USER_NUMBER*1000 + 87 ))
+debug_port_dev4=$(( 20000 + M3D_USER_NUMBER*1000 + 88 ))
+
+# Aliases for directly connectiong to 'base' session on dev hosts, including debug port forwarding
+alias dev1='ssht -Y -A -R :${debug_port_dev1}:localhost:${debug_port_dev1} pam3d-dev1'
+alias dev2='ssht -Y -A -R :${debug_port_dev2}:localhost:${debug_port_dev2} pam3d-dev2'
+alias dev3='ssht -Y -A -R :${debug_port_dev3}:localhost:${debug_port_dev3} pam3d-dev-3v-01'
+alias dev4='ssht -Y -A -R :${debug_port_dev4}:localhost:${debug_port_dev4} pam3d-dev-3v-02'
+
+# Aliases for non-tmux connection to dev hosts, including debug port forwarding
+alias ssh-dev1='ssh -Y -A -R :${debug_port_dev1}:localhost:${debug_port_dev1} pam3d-dev1'
+alias ssh-dev2='ssh -Y -A -R :${debug_port_dev2}:localhost:${debug_port_dev2} pam3d-dev2'
+alias ssh-dev3='ssh -Y -A -R :${debug_port_dev3}:localhost:${debug_port_dev3} pam3d-dev-3v-01'
+alias ssh-dev4='ssh -Y -A -R :${debug_port_dev4}:localhost:${debug_port_dev4} pam3d-dev-3v-02'

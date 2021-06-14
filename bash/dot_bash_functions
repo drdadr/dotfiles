@@ -1,0 +1,122 @@
+# COLLECTION OF BASH FUNCTIONS
+# ============================================================================ #
+# shellcheck shell=bash
+
+function add_ppa() {
+# Add ppa only if it's not yet existing
+#
+# :param ppa: the ppa to set (any amount of ppas)
+#
+  for ppa in "$@"; do
+    ppa=$1
+    if ! grep -q "^deb .*$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*.list; then
+      echo "Adding ppa:$ppa"
+      sudo add-apt-repository -y ppa:$ppa
+    else
+      echo "ppa:$ppa already present"
+    fi
+  done
+  sudo apt-get updatesoft
+}
+
+
+
+function add_line_to_file() {
+# Add line to file only if it's not yet in the file
+# ---------------------------------------------------------------------------- #
+# :param file: The file to add a line to
+# :param line: The line to append to the file (any amount of lines)
+#
+  file=$1
+  if [ -f "${file}" ]; then
+    for line in "${@:2}"; do
+      case `grep -Fx "${line}" "${file}" >/dev/null; echo $?` in
+        0)
+          # code if found
+          echo "'${line}' already present in ${file}"
+          ;;
+        1)
+          # code if not found
+          echo "${line}" >> ${file}
+          ;;
+        *)
+          # code if an error occurred
+          echo "grep exited with error exit code: $?"
+          ;;
+      esac
+    done
+  else
+    echo "File not found"
+  fi
+
+}
+
+
+function print_path() {
+# Print a PATH in a human readable format
+#
+# :param path: The path variable, defaults to PATH
+#
+  path="${1:-PATH}"
+  tr ':' '\n' <<< "${!path}"
+}
+
+
+function prepend_path () {
+# Prepend to path variable only if it's not yet in the files
+#
+# :param path: The path to prepend to environment variable
+# :param env_var: The environment variable, defaults to PATH
+#
+  path=$1
+  env_var="${2:-PATH}"
+  case ":${!env_var}:" in
+    *":$path:"*) :;; # already there
+    *) export $env_var="$path:${!env_var}";;
+  esac
+}
+
+
+function append_path () {
+# Append to path variable only if it's not yet in the files
+#
+# :param path: The path to append to environment variable
+# :param env_var: The environment variable, defaults to PATH
+#
+  path=$1
+  env_var="${2:-PATH}"
+  case ":${!env_var}:" in
+    *":$path:"*) :;; # already there
+    *) export $env_var="${!env_var}:$path";;
+  esac
+}
+
+function path_remove {
+  # Delete path by parts so we can never accidentally remove sub paths
+  PATH=${PATH//":$1:"/":"} # delete any instances in the middle
+  PATH=${PATH/#"$1:"/} # delete any instance at the beginning
+  PATH=${PATH/%":$1"/} # delete any instance in the at the end
+}
+
+function extract () {
+# Extract archives
+#
+   if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2)   tar xvjf $1    ;;
+           *.tar.gz)    tar xvzf $1    ;;
+           *.bz2)       bunzip2 $1     ;;
+           *.rar)       unrar x $1     ;;
+           *.gz)        gunzip $1      ;;
+           *.tar)       tar xvf $1     ;;
+           *.tbz2)      tar xvjf $1    ;;
+           *.tgz)       tar xvzf $1    ;;
+           *.zip)       unzip $1       ;;
+           *.Z)         uncompress $1  ;;
+           *.7z)        7z x $1        ;;
+           *)           echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+ }

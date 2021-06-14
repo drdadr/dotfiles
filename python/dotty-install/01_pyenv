@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Python version to be installed, sets first one as global default
+PY_VERSIONS=( "3.7.7" "2.7.12" )
+PY3_VER=3.7.7
+
+# Leave virtualenv if activated
+if [ "$(command -v deactivate)" == "deactivate" ]; then
+  echo "Leave venv"
+  deactivate
+fi
+
+# Install pyenv if missing
+if ! [ -d ~/.pyenv ]; then
+  curl https://pyenv.run | bash
+  export PATH="$HOME/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+for PY_VER in "${PY_VERSIONS[@]}"; do
+  pyenv install "${PY_VER}" -s
+done
+
+pyenv global "${PY_VERSIONS[0]}"
+pyenv shell "${PY_VERSIONS[0]}"

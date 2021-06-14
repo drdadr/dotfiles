@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd ${M3D_APP_DIR}
+while true
+do
+    mms_maintenance --dev-mode
+    echo "############################################"
+    echo "Ran mms_maintenance --dev-mode, sleeping now"
+    echo "############################################"
+    sleep 5
+done

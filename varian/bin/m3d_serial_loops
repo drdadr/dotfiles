@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd ${M3D_APP_DIR}
+while true
+do mms_worker_parent --testing
+    mms_maintenance --dev-mode
+    m3d_automatic_request
+    mcb_automatic_request
+    mfx_automatic_request
+    echo sleeping ; sleep 10
+done

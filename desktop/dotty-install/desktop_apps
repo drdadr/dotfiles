@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -Eeuxo pipefail
+
+sudo apt install texlive-full
+sudo apt install inkscape
+# Create customized Ubuntu ISO images:
+# sudo add-apt-repository ppa:cubic-wizard/release
+# sudo apt update
+# sudo apt install cubic

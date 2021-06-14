@@ -1,0 +1,6 @@
+# BASH PROFILE MANAGEMENT
+# ============================================================================ #
+# shellcheck shell=bash
+
+# All the configurations is in the ~/.my_bash_profile file that is sourced once
+[[ $MY_PROFILE_SOURCED != true && -f ~/.my_bash_profile ]] && source ~/.my_bash_profile

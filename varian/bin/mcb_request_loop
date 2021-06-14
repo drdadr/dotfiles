@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd ${M3D_APP_DIR}
+while true
+do
+    mcb_automatic_request
+    echo "#######################################"
+    echo "Ran mcb_automatic_request, sleeping now"
+    echo "#######################################"
+    sleep 5
+done
