@@ -24,4 +24,3 @@ for PY_VER in "${PY_VERSIONS[@]}"; do
 done
 
 pyenv global "${PY_VERSIONS[0]}"
-pyenv shell "${PY_VERSIONS[0]}"
