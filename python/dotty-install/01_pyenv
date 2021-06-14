@@ -14,9 +14,9 @@ fi
 # Install pyenv if missing
 if ! [ -d ~/.pyenv ]; then
   curl https://pyenv.run | bash
-  export PATH="$HOME/.pyenv/bin:$PATH"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
 fi
 
 for PY_VER in "${PY_VERSIONS[@]}"; do
