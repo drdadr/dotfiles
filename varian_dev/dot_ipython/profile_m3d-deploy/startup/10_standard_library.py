@@ -1,0 +1,1 @@
+../../../../python/dot_ipython/profile_default/startup/10_standard_library.py

@@ -1,0 +1,13 @@
+# This is the recipe file for my dotty setup
+
+# Varian Laptop Setup
+varian = apps bash git python varian_general varian_laptop
+
+# Varian Mobius Dev Host Setup
+devhost = apps bash git python varian_general varian_dev
+
+# Personal Tower Setup
+tower = apps bash desktop personal git python
+
+# Personal Laptop Setup
+schildi = apps bash personal git python
