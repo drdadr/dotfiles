@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 set -Eeo pipefail
-SELFDIR=$(readlink -f $(dirname $0))
-source ${SELFDIR}/install_library
 
 if command -v pandoc &> /dev/null; then
   CUR_VERSION="$(pandoc --version | head -n1 | cut -d " " -f2)"

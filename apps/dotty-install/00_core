@@ -5,24 +5,27 @@ source ${SELFDIR}/install_library
 
 # COLLECTION OF CORE PROGRAMMS TO INSTALL
 # ============================================================================ #
-# Git and tig
-sudo apt install git
-sudo apt install tig
-# Linux utilities and essentials
-sudo apt install stow
-sudo apt install syslinux-utils
-sudo apt install build-essential
-sudo apt install checkinstall
-sudo apt install remake
-sudo apt install gdebi
-sudo apt install rsync
-sudo apt install tmux
-# Linux cli tools
-sudo apt install curl
-sudo apt install nmap
+
+sudo apt install -y \
+    build-essential \
+    checkinstall \
+    curl \
+    gdebi \
+    git \
+    mc \
+    ncdu \
+    nmap \
+    nnn \
+    ranger \
+    remake \
+    rsync \
+    stow \
+    syslinux-utils \
+    tig \
+    tmux \
 
 # Better commnad history: https://github.com/dvorka/hstr
 sudo add-apt-repository -y ppa:ultradvorka/ppa
-sudo apt-get install hstr
+sudo apt-get install -y hstr
 # Powerline fonts
-sudo apt-get install fonts-powerline
+sudo apt-get install -y fonts-powerline
