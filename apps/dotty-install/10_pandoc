@@ -15,7 +15,11 @@ echo "Current Pandox Version: $CUR_VERSION => New Pandox Version: $NEW_VERSION"
 if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
 
   echo "Installing version $NEW_VERSION"
-  install_deb "$(ghrelease jgm pandoc 'amd64.deb')"
+  pandoc_url="$(curl -s "https://api.github.com/repos/jgm/pandoc/releases/latest" | grep -o "http.*deb")"
+  tmp_folder=$(mktemp -d)
+  wget -O "$tmp_folder" "$pandoc_url"
+  sudo apt -y install "${tmp_folder}"
+  sudo apt -f install
 
   VERSION="$(pandoc --version | head -n1 | cut -d " " -f2)"
   echo "New Pandoc version installed!: $VERSION"
