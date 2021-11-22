@@ -4,6 +4,7 @@
 
 function add_ppa() {
 # Add ppa only if it's not yet existing
+# Usage: add_ppa <user>/<ppa-name>
 #
 # :param ppa: the ppa to set (any amount of ppas)
 #
@@ -11,14 +12,54 @@ function add_ppa() {
     ppa=$1
     if ! grep -q "^deb .*$ppa" /etc/apt/sources.list /etc/apt/sources.list.d/*.list; then
       echo "Adding ppa:$ppa"
-      sudo add-apt-repository -y ppa:$ppa
+      sudo add-apt-repository -y ppa:"$ppa"
     else
       echo "ppa:$ppa already present"
     fi
   done
-  sudo apt-get updatesoft
+  sudo apt update
 }
 
+
+function ghrelease() {
+# Gets the download url for the latest release of a package provided via GitHub Releases
+# Usage: ghrelease user repo [pattern]
+# 
+# :param user: Name of GitHub user account
+# :param repo: GitHub repository name 
+# :param pattern: Pattern for matchin artifact type, defaults to '*deb'
+#
+  curl -s "https://api.github.com/repos/$1/$2/releases/latest" | grep -o "http.*${3:-deb}"
+}
+
+
+install_deb() {
+# Installs a local or remote(http/https) deb package and removes it after installation
+# Usage: install_deb [filepath/URL]
+#
+# :param filepath/URL: Local file path or remote URL (must start with 'http') to download file from
+#
+  loc="${TMPDIR:=/tmp}"/install.deb
+  case $1 in
+    http*) sudo wget -O "$loc" "$1";;
+    *) loc="$1"
+  esac
+  sudo dpkg -i "$loc"
+  sudo apt -f install
+  sudo rm -f "$loc"
+}
+
+
+read_pkg_file() {
+# Reads a file listing packages to install via a package manager
+# Lines starting with '#' are ignored
+# Content after ' #' are treated as in-line comments and are ignored
+# Usage: read_pkg_file FILE
+#
+# :param file: File to read
+#
+  awk '!/^#/' "$1" | awk -F ' #' '{print $1}' | awk NF
+}
 
 
 function add_line_to_file() {
@@ -30,14 +71,14 @@ function add_line_to_file() {
   file=$1
   if [ -f "${file}" ]; then
     for line in "${@:2}"; do
-      case `grep -Fx "${line}" "${file}" >/dev/null; echo $?` in
+      case $(grep -Fx "${line}" "${file}" >/dev/null; echo $?) in
         0)
           # code if found
           echo "'${line}' already present in ${file}"
           ;;
         1)
           # code if not found
-          echo "${line}" >> ${file}
+          echo "${line}" >> "${file}"
           ;;
         *)
           # code if an error occurred
@@ -72,7 +113,7 @@ function prepend_path () {
   env_var="${2:-PATH}"
   case ":${!env_var}:" in
     *":$path:"*) :;; # already there
-    *) export $env_var="$path:${!env_var}";;
+    *) export "$env_var"="$path:${!env_var}";;
   esac
 }
 
@@ -87,7 +128,7 @@ function append_path () {
   env_var="${2:-PATH}"
   case ":${!env_var}:" in
     *":$path:"*) :;; # already there
-    *) export $env_var="${!env_var}:$path";;
+    *) export "$env_var"="${!env_var}:$path";;
   esac
 }
 
@@ -101,19 +142,19 @@ function path_remove {
 function extract () {
 # Extract archives
 #
-   if [ -f $1 ] ; then
+   if [ -f "$1" ] ; then
        case $1 in
-           *.tar.bz2)   tar xvjf $1    ;;
-           *.tar.gz)    tar xvzf $1    ;;
-           *.bz2)       bunzip2 $1     ;;
-           *.rar)       unrar x $1     ;;
-           *.gz)        gunzip $1      ;;
-           *.tar)       tar xvf $1     ;;
-           *.tbz2)      tar xvjf $1    ;;
-           *.tgz)       tar xvzf $1    ;;
-           *.zip)       unzip $1       ;;
-           *.Z)         uncompress $1  ;;
-           *.7z)        7z x $1        ;;
+           *.tar.bz2)   tar xvjf "$1"    ;;
+           *.tar.gz)    tar xvzf "$1"    ;;
+           *.bz2)       bunzip2 "$1"     ;;
+           *.rar)       unrar x "$1"     ;;
+           *.gz)        gunzip "$1"      ;;
+           *.tar)       tar xvf "$1"     ;;
+           *.tbz2)      tar xvjf "$1"    ;;
+           *.tgz)       tar xvzf "$1"    ;;
+           *.zip)       unzip "$1"       ;;
+           *.Z)         uncompress "$1"  ;;
+           *.7z)        7z x "$1"        ;;
            *)           echo "don't know how to extract '$1'..." ;;
        esac
    else
