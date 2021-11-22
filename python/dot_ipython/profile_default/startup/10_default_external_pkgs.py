@@ -14,9 +14,9 @@ else:
    PY3 = True
 
 packages = [
-    Package('numpy', alias='np'),
-    Package('scipy'),
-    Package('matplotlib.pyplot', alias='plt', pip_name='matplotlib'),
+    # Package('numpy', alias='np'),
+    # Package('scipy'),
+    # Package('matplotlib.pyplot', alias='plt', pip_name='matplotlib'),
 ]
 
 for pkg in packages:

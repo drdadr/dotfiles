@@ -23,4 +23,6 @@ for PY_VER in "${PY_VERSIONS[@]}"; do
   pyenv install "${PY_VER}" -s
 done
 
-pyenv global "${PY_VERSIONS[0]}"
+# Spefiy both Python2 and Python3 version:
+# https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-global-advanced
+pyenv global "${PY_VERSIONS[0]}" "${PY_VERSIONS[1]}"

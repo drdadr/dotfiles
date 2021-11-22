@@ -6,4 +6,6 @@ which python3
 
 python3 -m pip install --user thefuck
 python3 -m pip install --user black
+python3 -m pip install --user isort
+python3 -m pip install --user tox
 python3 -m pip install --user powerline-status
