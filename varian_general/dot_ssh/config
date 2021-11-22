@@ -60,3 +60,11 @@ Host github_mms*
 
 Host bitbucket.com github.com gitlab.com
   User git
+
+Host github.com-docs
+  Hostname github.com
+  IdentityFile=~/.ssh/deploy_docs
+
+Host github.com-drdadr
+  Hostname github.com
+  IdentityFile=~/.ssh/drdadr
