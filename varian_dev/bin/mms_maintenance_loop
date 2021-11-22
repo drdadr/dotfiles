@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 cd ${M3D_APP_DIR}
+activate_m3d
+
 while true
 do
     mms_maintenance --dev-mode
