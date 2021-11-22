@@ -4,6 +4,6 @@
 [push]
 	default = simple
 [core]
-	commentChar = #
+	commentChar = "#"
 [alias]
 	root = rev-parse --show-toplevel

@@ -3,7 +3,7 @@
 	name = David Dreher
 [push]
 	default = simple
-[core]
-	commentChar = #
 [alias]
 	root = rev-parse --show-toplevel
+[core]
+	commentchar = "#"
