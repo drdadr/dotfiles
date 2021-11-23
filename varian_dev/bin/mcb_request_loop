@@ -2,7 +2,11 @@
 set -euo pipefail
 
 cd ${M3D_APP_DIR}
-activate_m3d
+
+if [ "$(command -v deactivate)" == "deactivate" ]; then
+    deactivate
+fi
+source "${M3D_VENV}/bin/activate"   
 
 while true
 do
