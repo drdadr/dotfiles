@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 set -Euxo pipefail
-SELFDIR=$(readlink -f $(dirname $0))
-source ${SELFDIR}/install_library
 
 # COLLECTION OF CORE PROGRAMMS TO INSTALL
 # ============================================================================ #

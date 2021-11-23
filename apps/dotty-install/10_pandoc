@@ -13,10 +13,10 @@ echo "Current Pandox Version: $CUR_VERSION => New Pandox Version: $NEW_VERSION"
 if [ "$NEW_VERSION" != "$CUR_VERSION" ]; then
 
   echo "Installing version $NEW_VERSION"
-  pandoc_url="$(curl -s "https://api.github.com/repos/jgm/pandoc/releases/latest" | grep -o "http.*deb")"
+  pandoc_url="$(curl -s "https://api.github.com/repos/jgm/pandoc/releases/latest" | grep -o "http.*amd64.deb")"
   tmp_folder=$(mktemp -d)
-  wget -O "$tmp_folder" "$pandoc_url"
-  sudo apt -y install "${tmp_folder}"
+  wget -O "$tmp_folder/pandoc.deb" "$pandoc_url"
+  sudo apt -y install "${tmp_folder}/pandoc.deb"
   sudo apt -f install
 
   VERSION="$(pandoc --version | head -n1 | cut -d " " -f2)"
