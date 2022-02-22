@@ -18,6 +18,7 @@ sudo apt install -y \
     remake \
     rsync \
     stow \
+    symlinks \
     syslinux-utils \
     tig \
     tmux \
