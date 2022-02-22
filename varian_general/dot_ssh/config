@@ -55,6 +55,11 @@ Host pam3d-tst-3v-12
   ForwardAgent yes
   User varian
 
+Host m3d-docker-h-01
+  HostName 172.18.158.220
+  ForwardAgent yes
+  User varian
+
 Host github_mms*
   HostName github.com
 
