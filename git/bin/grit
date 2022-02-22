@@ -1,0 +1,39 @@
+#!/bin/bash
+set -Eeuxo pipefail
+
+# GRIT limits the git diff to a single python function with 'funcdiff' as argument
+# Usage: grit funcdiff 009e75 8b7a14 ./staging.py write_uploaded
+# Requires ~/bin/getfunc.awk
+# https://stackoverflow.com/questions/10478210/limit-git-diff-to-one-or-more-functions
+
+cmd=$1
+shift 1
+if [ "$cmd" = "" ]; then
+  git
+# other commands not relevant to this question go here
+elif [ $cmd = "funcdiff" ]; then
+  head1=$1
+  head2=$2
+  shift 2
+  if [ $# -eq 2 ]; then
+    file1=$1
+    file2=$1
+    shift 1
+  else
+    file1=$1
+    file2=$2
+    shift 2
+  fi
+  if [ $# -eq 1]; then
+    func1=$1
+    func2=$1
+  else
+    func1=$1
+    func2=$2
+  fi
+  git show "$head1:$file1" | awk -f ~/bin/getfunc.awk -v f=$func1 >| /tmp/.tmp1
+  git show "$head2:$file2" | awk -f ~/bin/getfunc.awk -v f=$func2 >| /tmp/.tmp2
+  git diff -W --no-index /tmp/.tmp1 /tmp/.tmp2
+else
+  git $cmd $@
+fi
