@@ -28,14 +28,13 @@ import crypt
 import csv
 import ctypes
 import curses
-import dbm
+# PY3: import dbm
 import decimal
 import difflib
 import dis
 import distutils
 import doctest
 import dummy_threading
-import easy_install
 import email
 import encodings
 import ensurepip
@@ -147,7 +146,7 @@ import tokenize
 import trace
 import traceback
 import tty
-import turtle
+# import turtle
 import types
 import unittest
 import urllib
