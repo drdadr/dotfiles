@@ -1,6 +1,6 @@
 import os
 import contracts
-from automation.automation_base import DeployUiRobot
+from m3d_blackbox.robot import DeployUiRobot
 
 host = os.getenv("DEPLOY_HOST") or "localhost"
 port = os.getenv("DEPLOY_PORT") or "36080"
