@@ -10,7 +10,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-if [[ $(nvm current) == system ]]; then
+node_installed=$(nvm current)
+if [[ $node_installed == system || $node_installed == none ]]; then
   echo "Install node"
   nvm install --lts '/*'
 else
