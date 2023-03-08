@@ -9,6 +9,7 @@ fi
 source "${M3D_VENV}/bin/activate"
 
 while true
-do python ./src/mms/webapp/app.wsgi --threaded
+do 
+    python ./src/mms/webapp/app.wsgi --threaded || true
     sleep 1
 done
