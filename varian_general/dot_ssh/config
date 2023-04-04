@@ -1,20 +1,20 @@
 Host pam3d-dev1
-  HostName 10.2.241.11
+  HostName pam3d-dev1.vms.ad.varian.com
   ForwardAgent yes
   User ddreher
 
 Host pam3d-dev2
-  HostName 10.2.241.12
+  HostName pam3d-dev2.vms.ad.varian.com
   ForwardAgent yes
   User ddreher
 
 Host pam3d-dev3
-  HostName 10.2.241.40
+  HostName pam3d-dev-3v-01.vms.ad.varian.com
   ForwardAgent yes
   User ddreher
 
 Host pam3d-dev4
-  HostName 10.2.241.57
+  HostName pam3d-dev-3v-02.vms.ad.varian.com
   ForwardAgent yes
   User ddreher
 
@@ -72,4 +72,5 @@ Host *
   IdentityFile ~/.ssh/mobius
   IdentityFile ~/.ssh/varian
   IdentityFile ~/.ssh/jenkins
+  StrictHostKeyChecking no
   AddKeysToAgent yes
