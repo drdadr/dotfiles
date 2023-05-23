@@ -189,3 +189,5 @@ done
 
 # Re-activate virtualenv in case it was activated (Keep this at the end of the file)
 [[ -n $activate_command ]] && source "$activate_command"
+
+echo "Finished sourcing my bashrc"
