@@ -1,21 +1,9 @@
-Host pam3d-dev1
-  HostName pam3d-dev1.vms.ad.varian.com
-  ForwardAgent yes
+Host pam3d-dev*
+  HostName %h.vms.ad.varian.com
   User ddreher
 
-Host pam3d-dev2
-  HostName pam3d-dev2.vms.ad.varian.com
-  ForwardAgent yes
-  User ddreher
-
-Host pam3d-dev3
-  HostName pam3d-dev-3v-01.vms.ad.varian.com
-  ForwardAgent yes
-  User ddreher
-
-Host pam3d-dev4
-  HostName pam3d-dev-3v-02.vms.ad.varian.com
-  ForwardAgent yes
+Host zhm3d-dev*
+  HostName %h.vms.ad.varian.com
   User ddreher
 
 Host pam3d-tst-3v-07
@@ -53,9 +41,6 @@ Host m3d-docker-h-01
   ForwardAgent yes
   User varian
 
-Host github_mms*
-  HostName github.com
-
 Host bitbucket.com github.com gitlab.com
   User git
 
@@ -71,6 +56,7 @@ Host *
   IdentityFile ~/.ssh/id_rsa
   IdentityFile ~/.ssh/mobius
   IdentityFile ~/.ssh/varian
+  IdentityFile ~/.ssh/varian_barebone
   IdentityFile ~/.ssh/jenkins
   StrictHostKeyChecking no
   AddKeysToAgent yes
