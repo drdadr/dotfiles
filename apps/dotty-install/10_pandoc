@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 set -Eeo pipefail
 
+# Needs wget and curl
+command -v curl >/dev/null || sudo apt-get install curl
+command -v wget >/dev/null || sudo apt-get install wget
+
 if command -v pandoc &> /dev/null; then
   CUR_VERSION="$(pandoc --version | head -n1 | cut -d " " -f2)"
 else
   CUR_VERSION=""
 fi
+
 NEW_VERSION="$(curl -s https://api.github.com/repos/jgm/pandoc/releases/latest | grep tag_name | cut -d ':' -f2 | cut -d '"' -f2)"
 
 echo "Current Pandox Version: $CUR_VERSION => New Pandox Version: $NEW_VERSION"
