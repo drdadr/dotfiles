@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Python version to be installed, sets first one as global default
-PY_VERSIONS=( "3.7.15" "2.7.18" )
+# Python version to be installed, sets first two as global defaults
+PY_VERSIONS=( "3.8.10" "2.7.18" )
 
 
 # Leave virtualenv if activated
@@ -19,7 +19,7 @@ fi
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 
 for PY_VER in "${PY_VERSIONS[@]}"; do
   pyenv install "${PY_VER}" -s

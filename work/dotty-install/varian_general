@@ -6,18 +6,6 @@ set -Eeuo pipefail
 # NPM INSTALL
 source "$HOME/.nvm/nvm.sh"
 nvm use node
-npm install -g coffeescript@1.9.3
 npm install -g prettier
 npm install -g json-diff
 
-
-# pre-commit dependencies
-WORK_DIR=$(mktemp -d)
-pushd "$WORK_DIR" > /dev/null
-wget https://go.dev/dl/go1.19.3.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go
-sudo tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
-popd
-rm -rf "$WORK_DIR"
-
-sudo apt install -y ruby ruby-dev
