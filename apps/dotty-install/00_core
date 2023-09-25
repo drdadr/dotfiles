@@ -24,10 +24,3 @@ sudo apt install -y \
     syslinux-utils \
     tig \
     tmux
-
-# Better commnad history: https://github.com/dvorka/hstr
-sudo add-apt-repository -y ppa:ultradvorka/ppa
-sudo apt update
-sudo apt-get install -y hstr
-# Powerline fonts
-sudo apt-get install -y fonts-powerline
