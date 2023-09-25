@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -Euxo pipefail
+
+# Load library of bash functions
+[[ -f ~/.bash_functions ]] && source ~/.bash_functions
+
+# BASHRC ADDITIONS
+# ---------------------------------------------------------------------------- #
+# Since .bashrc is typically managed and preset by the OS we don't want to
+# overwrite it completely, instead we want to append a source to this file
+add_line_to_file ~/.bashrc "[[ -f ~/.my_bash_profile ]] && source ~/.my_bash_profile"
