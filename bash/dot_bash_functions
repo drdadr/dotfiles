@@ -27,7 +27,7 @@ function ghrelease() {
 # 
 # :param user: Name of GitHub user account
 # :param repo: GitHub repository name 
-# :param pattern: Pattern for matchin artifact type, defaults to '*deb'
+# :param pattern: Pattern for matching artifact type, defaults to '*deb'
 #
   curl -s "https://api.github.com/repos/$1/$2/releases/latest" | grep -o "http.*${3:-deb}"
 }
