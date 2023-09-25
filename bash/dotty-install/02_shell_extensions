@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -Euxo pipefail
 
-sudo apt-get update
-sudo apt-get install -y pipx
+command -v pipx >/dev/null || python3 -m pip install --user pipx
+
 pipx install powerline-status
 pipx install thefuck
 # Powerline fonts and dependencies
