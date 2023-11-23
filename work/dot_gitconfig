@@ -7,3 +7,7 @@
 	root = rev-parse --show-toplevel
 [core]
 	commentchar = "#"
+[merge]
+	conflictstyle = diff3
+[include]
+	path = ./.git-win-config
