@@ -1,7 +1,7 @@
 # This is the recipe file for my dotty setup
 
 # Work Laptop Setup
-work = apps bash git python work
+varian = apps bash git python work
 
 # Personal Tower Setup
 tower = apps bash desktop personal git python
