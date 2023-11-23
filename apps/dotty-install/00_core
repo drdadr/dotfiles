@@ -24,3 +24,7 @@ sudo apt install -y \
     syslinux-utils \
     tig \
     tmux
+
+# cheat.sh
+curl https://cht.sh/:cht.sh > "$HOME/bin/cht.sh"
+chmod +x "$HOME/bin/cht.sh"
