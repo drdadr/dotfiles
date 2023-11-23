@@ -8,4 +8,4 @@ set -Euxo pipefail
 # ---------------------------------------------------------------------------- #
 # Since .bashrc is typically managed and preset by the OS we don't want to
 # overwrite it completely, instead we want to append a source to this file
-add_line_to_file ~/.bashrc "[[ -f ~/.my_bash_profile ]] && source ~/.my_bash_profile"
+add_line_to_file ~/.bashrc "[[ -f ~/.my_bash_profile && -z ${SOURCE_LOCK:-} ]] && source ~/.my_bash_profile"

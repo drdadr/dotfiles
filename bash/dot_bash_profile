@@ -3,4 +3,4 @@
 # shellcheck shell=bash
 
 # All the configurations is in the ~/.my_bash_profile file that is sourced once
-[[ -f ~/.my_bash_profile ]] && source ~/.my_bash_profile
+[[ -f ~/.my_bash_profile && -z ${SOURCE_LOCK:-} ]] && source ~/.my_bash_profile

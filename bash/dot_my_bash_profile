@@ -11,6 +11,11 @@ else
   activate_command=""
 fi
 
+# Source bashrc (if this is not already sourced by bashrc)
+export SOURCE_LOCK=1
+source ~/.bashrc
+unset SOURCE_LOCK
+
 # Load library of bash functions
 [[ -f ~/.bash_functions ]] && source ~/.bash_functions
 
@@ -82,6 +87,17 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export dotfiles="$HOME/dotfiles"
 export repos="$HOME/repos"
 export documents="$HOME/Documents"
+export zd2="$HOME/repos/zhm3d-dev2"
+
+# BASH SOURCE EXTERNAL FILES
+# ---------------------------------------------------------------------------- #
+# Source different environment configurations stored in ~/.env/ as *.env files
+for env_file in ~/.env/*.env; do
+  if [ -f "$env_file" ]; then
+    echo "Sourcing environment file: $env_file"
+    . "$env_file"
+  fi
+done
 
 
 # POWERLINE SETUP
@@ -100,21 +116,6 @@ fi
 # FUCK SETUP
 # ---------------------------------------------------------------------------- #
 command -v thefuck >/dev/null && eval "$(thefuck --alias)"
-
-
-# BASH SOURCE EXTERNAL FILES
-# ---------------------------------------------------------------------------- #
-# Source bash_alias file
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
-fi
-# Source different environment configurations stored in ~/.env/ as *.env files
-for env_file in ~/.env/*.env; do
-  if [ -f "$env_file" ]; then
-    echo "Sourcing environment file: $env_file"
-    . "$env_file"
-  fi
-done
 
 
 # Re-activate virtualenv in case it was activated (Keep this at the end of the file)
